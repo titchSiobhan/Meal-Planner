@@ -1,3 +1,81 @@
+// planner.js — planner page behaviour
+// DOM-ready: wire up the Plan button and per-day slot clicks
+document.addEventListener('DOMContentLoaded', () => {
+    // Helper: pick a random dinner or return null
+    function getRandomDinner() {
+        const dinners = Store.getDinner();
+        if (!dinners || dinners.length === 0) return null;
+        return dinners[Math.floor(Math.random() * dinners.length)];
+    }
+
+    // Set a random meal into a single slot element
+    function planSingleSlot(slot) {
+        const dinner = getRandomDinner();
+        slot.innerHTML = '';
+        const mealItem = document.createElement('div');
+        mealItem.textContent = dinner ? dinner.name : 'No meals available';
+        slot.appendChild(mealItem);
+    }
+
+    // Randomize all slots with class="meal"
+    function randomizeAllDays() {
+        const daySlots = document.querySelectorAll('.meal');
+        daySlots.forEach(slot => planSingleSlot(slot));
+    }
+
+    // Wire Plan button
+    const planBtn = document.querySelector('#plan');
+    if (planBtn) planBtn.addEventListener('click', randomizeAllDays);
+
+    // Allow clicking an individual slot to re-plan that day
+    const slots = document.querySelectorAll('.meal');
+    slots.forEach(slot => {
+        slot.addEventListener('click', () => planSingleSlot(slot));
+    });
+
+    // Optional: populate slots once on load so the planner shows current meals
+    // without waiting for a click. This chooses a random meal per slot.
+    randomizeAllDays();
+});
+// planner.js — planner page behaviour
+// DOM-ready: wire up the Plan button and per-day slot clicks
+document.addEventListener('DOMContentLoaded', () => {
+    // Helper: pick a random dinner or return null
+    function getRandomDinner() {
+        const dinners = Store.getDinner();
+        if (!dinners || dinners.length === 0) return null;
+        return dinners[Math.floor(Math.random() * dinners.length)];
+    }
+
+    // Set a random meal into a single slot element
+    function planSingleSlot(slot) {
+        const dinner = getRandomDinner();
+        slot.innerHTML = '';
+        const mealItem = document.createElement('div');
+        mealItem.textContent = dinner ? dinner.name : 'No meals available';
+        slot.appendChild(mealItem);
+    }
+
+    // Randomize all slots with class="meal"
+    function randomizeAllDays() {
+        const daySlots = document.querySelectorAll('.meal');
+        daySlots.forEach(slot => planSingleSlot(slot));
+    }
+
+    // Wire Plan button
+    const planBtn = document.querySelector('#plan');
+    if (planBtn) planBtn.addEventListener('click', randomizeAllDays);
+
+    // Allow clicking an individual slot to re-plan that day
+    const slots = document.querySelectorAll('.meal');
+    slots.forEach(slot => {
+        slot.addEventListener('click', () => planSingleSlot(slot));
+    });
+
+    // Optional: populate slots once on load so the planner shows current meals
+    // without waiting for a click. This chooses a random meal per slot.
+    randomizeAllDays();
+});
 function printMeals() {
     const dinners = Store.getDinner();
     const planMeals = document.querySelector('.meal');
@@ -15,82 +93,40 @@ const randomMeal = () => {
     
    if (dinners && dinners.length > 0) {
         const randomiseMeals = Math.floor(Math.random() * dinners.length);
-        console.log(dinners[randomiseMeals].name);
-   
-} else {
-    console.log("I'm Empty")
-}
-}
+        // Planner script: make the Plan button and day slots robust and DOM-ready.
+        document.addEventListener('DOMContentLoaded', () => {
+            // Helper: pick a random dinner or return null
+            function getRandomDinner() {
+                const dinners = Store.getDinner();
+                if (!dinners || dinners.length === 0) return null;
+                return dinners[Math.floor(Math.random() * dinners.length)];
+            }
 
-randomMeal()
+            // Set a random meal into a single slot element
+            function planSingleSlot(slot) {
+                const dinner = getRandomDinner();
+                slot.innerHTML = '';
+                const mealItem = document.createElement('div');
+                mealItem.textContent = dinner ? dinner.name : 'No meals available';
+                slot.appendChild(mealItem);
+            }
 
+            // Randomize all slots with class="meal"
+            function randomizeAllDays() {
+                const daySlots = document.querySelectorAll('.meal');
+                daySlots.forEach(slot => planSingleSlot(slot));
+            }
 
+            // Wire Plan button
+            const planBtn = document.querySelector('#plan');
+            if (planBtn) planBtn.addEventListener('click', randomizeAllDays);
 
-//Randomize all day slots: choose a random dinner for each element with class="day"
+            // Allow clicking an individual slot to re-plan that day
+            const slots = document.querySelectorAll('.meal');
+            slots.forEach(slot => {
+                slot.addEventListener('click', () => planSingleSlot(slot));
+            });
 
-
-
-// Call printMeal on page load to show meals
-printMeals();
-//print random meal in planner 
-function planMeal() {
-    const dinners = Store.getDinner();
-    const planMeals = document.querySelector('.meal');
-    planMeals.innerHTML = ''; // Clear previous meals
-    if (dinners && dinners.length > 0) {
-        const randomIndex = Math.floor(Math.random() * dinners.length);
-        const dinner = dinners[randomIndex];
-        const mealItem = document.createElement('div');
-        mealItem.textContent = dinner.name;
-        planMeals.appendChild(mealItem);
-
-        //check if meal is all ready in planner
-
-       const existingMeal = planMeals.querySelector(`[data-meal-id="${dinner.id}"]`);
-        if (!existingMeal) {
-            console.log(`Duplicate meal found: ${dinner.name}`);
-            mealItem.dataset.mealName = dinner.name;
-            
-        } else {
-            mealItem.dataset.mealId = dinner.id;
-            planMeals.appendChild(mealItem);
-        }
-    } else {
-        const mealItem = document.createElement('div');
-        mealItem.textContent = "No meals available";
-        planMeals.appendChild(mealItem);
-    }
-    }
-
-
-function randomizeAllDays() {
-    const dinners = Store.getDinner();
-    const daySlots = document.querySelectorAll('.meal');
-    daySlots.forEach(slot => {
-        slot.innerHTML = ''; // clear previous content
-        if (dinners && dinners.length > 0) {
-            const idx = Math.floor(Math.random() * dinners.length);
-            const mealItem = document.createElement('div');
-            mealItem.textContent = dinners[idx].name;
-            slot.appendChild(mealItem);
-        } else {
-            const mealItem = document.createElement('div');
-            mealItem.textContent = 'No meals available';
-            slot.appendChild(mealItem);
-        }
-    });
-}
-
-// Wire a "randomize all" control if it exists in the page
-const randomizeAllBtn = document.querySelector('#plan');
-if (randomizeAllBtn) {
-    randomizeAllBtn.addEventListener('click', randomizeAllDays);
-}
-// Initialize the planner UI and wire events safely
-const planMeals = document.querySelector('.meal');
-if (planMeals) {
-    // Show an initial meal (or "No meals available") on load
-    planMeal();
-    // Re-plan on click
-    planMeals.addEventListener('click', planMeal);
-}
+            // If the page has a meals list container (#show-meals), do nothing here
+            // because `meal.js` handles that page. This script focuses on planner UI.
+        });

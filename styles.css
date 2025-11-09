@@ -30,6 +30,14 @@ body {
     flex-direction: column;
     gap: 30px;
 }
+.day {
+    display: flex;
+    flex-direction: row;
+}
+.meal {
+    padding: 0 20px;
+}
+
 
 .plan {
     grid-column: 6/ 8;
@@ -89,3 +97,36 @@ input {
     font-size: 1.2rem;
 }
 
+#add-meal-plan {
+    display: flex;
+    flex-direction: row;
+    
+    grid-column: 3/12;
+}
+
+#show-meals {
+    grid-row: 3
+}
+
+#add-meal-form {
+    display: flex; 
+    flex-direction: row;
+}
+
+@media screen and (max-width: 425px) {
+    .btn {
+        font-size: 1rem;
+    }
+   
+
+#add-meal-form{
+    flex-direction: column;
+    
+}
+
+#add-meal-plan {
+    
+    flex-direction: column;
+    grid-column: 5/8;
+}
+}

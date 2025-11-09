@@ -184,13 +184,13 @@ function planMeal() {
         mealItem.textContent = dinner.name;
         planMeals.appendChild(mealItem);
 
-        //check if meal is all ready in planner
+          //check if meal is all ready in planner
 
        const existingMeal = planMeals.querySelector(`[data-meal-id="${dinner.id}"]`);
         if (!existingMeal) {
             console.log(`Duplicate meal found: ${dinner.name}`);
             mealItem.dataset.mealName = dinner.name;
-            
+
         } else {
             mealItem.dataset.mealId = dinner.id;
             planMeals.appendChild(mealItem);
@@ -201,7 +201,6 @@ function planMeal() {
         planMeals.appendChild(mealItem);
     }
     }
-
 
 function randomizeAllDays() {
     const dinners = Store.getDinner();

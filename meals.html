@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="stylesheet" href="styles.css" />
+        
+        <title>Meal Planner</title>
+    </head>
+     
+        <header>
+
+        </header>
+        <body>
+            <nav class="sidebar">
+                <div class="new-meal">
+                    <div class="hamburger" onclick="hamburgerClick()">&#9776;</div>
+                    <div class="myLinks" id="myLinks">
+                        <div class="link">
+                            <a href="index.html">Planner</a>
+                            <a href="meals.html">Meals</a>
+                        </div>
+                        <div class="add">
+                            <form action="" class="add-meal" id="add-meal-form">
+                                <input type="text" id="meal-name-input" placeholder="Add new meal" />
+                                <button type="submit">Add</button>
+                            </form>
+                        </div>
+                        <div class="clear">
+                            <button class="clear-meals" id="clear-meals">Clear</button>
+                        </div>
+                    </div>
+            </nav>
+          <main>
+            <div class="show-meals" id="show-meals">
+                
+            </div>
+          </main>
+        
+        <footer></footer>
+        <script src="main.js"></script>
+    </body>
+</html>

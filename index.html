@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="stylesheet" href="styles.css" />
+       
+        <title>Meal Planner</title>
+    </head>
+     
+        <header>
+
+        </header>
+        <body>
+            <nav class="sidebar">
+                <div class="new-meal">
+                    <div class="hamburger" onclick="hamburgerClick()">&#9776;</div>
+                    <div class="myLinks" id="myLinks">
+                        
+                        <div class="link">
+                            <a href="index.html">Planner</a>
+                            <a href="meals.html">Meals</a>
+                        </div>
+                        <div class="add">
+                            <form action="" class="add-meal" id="add-meal-form">
+                                <input type="text" id="meal-name-input" placeholder="Add new meal" />
+                                <button type="submit">Add</button>
+                            </form>
+                        </div>
+                        <div class="clear">
+                            <button class="clear-meals" id="clear-meals">Clear</button>
+                        </div>
+                    </div>
+            </nav>
+            <section class="week" id="meal-container show-meals">
+                <div class="day monday">
+                    <h2>Monday:</h2>
+                    <h2 class="meal day1"></h2>
+                </div>
+                <div class="day tuesday">
+                    <h2>Tuesday:</h2>
+                    <h2 class="meal day2"></h2>
+                </div>
+                <div class="day wednesday">
+                    <h2>Wednesday:</h2>
+                    <h2 class="meal day3"></h2>
+                </div>
+                <div class="day thursday">
+                    <h2>Thursday:</h2>
+                    <h2 class="meal day4"></h2>
+                </div>
+                <div class="day friday">
+                    <h2>Friday:</h2>
+                    <h2 class="meal day5"></h2>
+                </div>
+                <div class="day saturday">
+                    <h2>Saturday:</h2>
+                    <h2 class="meal day6"></h2>
+                </div>
+                <div class="day sunday">
+                    <h2>Sunday:</h2>
+                    <h2 class="meal day7"></h2>
+                </div>
+            </section>
+            <section class="plan">
+                <div>
+                    <button id="plan">Plan</button>
+                </div>
+            </section>
+        
+        <footer></footer>
+        <script src="main.js"></script>
+    </body>
+</html>

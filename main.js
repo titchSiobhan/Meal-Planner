@@ -24,7 +24,7 @@ function Dinner(name, id) {
      // Get the counter value from local storage or set it to 0 if not present
     let counter = parseInt(localStorage.getItem('mealCounter')) || 0;
 
-    // Increment the counter
+    
     counter++;
 
     // Store the updated counter value in local storage
@@ -45,7 +45,7 @@ class Store {
         }
         return dinners;
     }
-    // You might also want a static method to add a dinner to local storage
+    //static method to add a dinner to local storage
     static addDinner(dinner) {
         const allDinners = Store.getDinner();
         allDinners.push(dinner);
@@ -87,36 +87,30 @@ function clear() {
 clearMeals.addEventListener('click', clear)
 
 
+
+
+
 // show meals in meal page
 
 // take dinner array and take each entry and add it to its own table
 function printMeal() {
+    try{
     const dinners = Store.getDinner();
     const showMeals = document.querySelector('#show-meals');
     //document.addEventListener('DOMContentLoaded', printMeal);
-showMeals.innerHTML = ''; // Clear previous meals
+showMeals.textContent = ''; // Clear previous meals
     dinners.forEach(dinner => {
         const mealItem = document.createElement('div');
+        mealItem.setAttribute('class', 'mealName');
         mealItem.textContent = dinner.name;
+        mealItem.dataset.id = dinner.id;
         showMeals.appendChild(mealItem);
     });
 }
-
-function printMeal() {
-    try {
-        const dinners = Store.getDinner();
-        const showMeals = document.querySelector('#show-meals');
-        showMeals.innerHTML = ''; // Clear previous meals
-        dinners.forEach(dinner => {
-            const mealItem = document.createElement('div');
-            mealItem.textContent = dinner.name;
-            showMeals.appendChild(mealItem);
-        });
-    } catch (error) {
-        console.error('Error in printMeal:', error);
-        // You can also show a user-friendly error message here
-        // For example: document.getElementById('error-message').textContent = 'An error occurred while printing meals.';
-    }
+catch (error) {
+         console.error('Error in printMeal:', error);       
+   }
+   
 }
 
 // Call printMeal on page load to show meals
@@ -126,10 +120,11 @@ function printMeals() {
     const dinners = Store.getDinner();
     const planMeals = document.querySelector('.meal');
     //document.addEventListener('DOMContentLoaded', printMeal);
-planMeals.innerHTML = ''; // Clear previous meals
+planMeals.textContent = ''; // Clear previous meals
     dinners.forEach(dinner => {
         const mealItem = document.createElement('div');
         mealItem.textContent = dinner.name;
+        mealItem.dataset.id = dinner.id;
         planMeals.appendChild(mealItem);
     });
 }
@@ -137,7 +132,7 @@ function printMeals() {
     try {
         const dinners = Store.getDinner();
         const planMeals = document.querySelector('.meal');
-        planMeals.innerHTML = ''; // Clear previous meals
+        planMeals.textContent = ''; // Clear previous meals
         dinners.forEach(dinner => {
             const mealItem = document.createElement('div');
             mealItem.textContent = dinner.name;
@@ -145,8 +140,7 @@ function printMeals() {
         });
     } catch (error) {
         console.error('Error in printMeals:', error);
-        // You can also show a user-friendly error message here
-        // For example: document.getElementById('error-message').textContent = 'An error occurred while printing meals.';
+        
     }
 }
 //return random meals to planner;
@@ -169,14 +163,13 @@ randomMeal()
 //Randomize all day slots: choose a random dinner for each element with class="day"
 
 
-
 // Call printMeal on page load to show meals
 printMeals();
 //print random meal in planner 
 function planMeal() {
     const dinners = Store.getDinner();
     const planMeals = document.querySelector('.meal');
-    planMeals.innerHTML = ''; // Clear previous meals
+    planMeals.textContent = ''; // Clear previous meals
 
     if (dinners && dinners.length > 0) {
         const randomIndex = Math.floor(Math.random() * dinners.length);
@@ -210,7 +203,7 @@ function randomizeAllDays() {
     const daySlots = document.querySelectorAll('.meal');
 
     daySlots.forEach(slot => {
-        slot.innerHTML = '';
+        slot.textContent = '';
         if (dinners.length > 0) {
             const idx = Math.floor(Math.random() * dinners.length);
             const dinner = dinners.splice(idx, 1)[0]; // remove used meal
@@ -240,3 +233,23 @@ if (planMeals) {
     // Re-plan on click
     planMeals.addEventListener('click', planMeal);
 }
+
+
+//delete individual meals
+
+
+function removeDinner(id) {
+    const allDinner = Store.getDinner();
+    const updateDinners = allDinner.filter(dinner => dinner.id != id);
+    localStorage.setItem('dinners', JSON.stringify(updateDinners));
+}
+
+const mealNames = document.querySelectorAll('.mealName');
+
+mealNames.forEach(mealName => {
+    mealName.addEventListener('click', (event) => {
+        const foodId = event.target.dataset.id;
+        removeDinner(foodId);
+        location.reload();
+    });
+});

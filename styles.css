@@ -162,3 +162,8 @@ input {
     cursor: pointer;
     
 }
+
+.mealName {
+    width: min-content;
+    padding: 2px 5px;
+}
